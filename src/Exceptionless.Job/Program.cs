@@ -106,10 +106,6 @@ namespace Exceptionless.Job {
                             app.UseWaitForStartupActionsBeforeServingRequests();
                             app.Use((context, func) => context.Response.WriteAsync($"Running Job: {jobOptions.JobName}"));
                         });
-
-                    var metricOptions = MetricOptions.ReadFromConfiguration(config);
-                    if (!String.IsNullOrEmpty(metricOptions.Provider))
-                        ConfigureMetricsReporting(webBuilder, metricOptions);
                 })
                 .ConfigureServices((ctx, services) => {
                     AddJobs(services, jobOptions);
@@ -121,6 +117,9 @@ namespace Exceptionless.Job {
                     Bootstrapper.RegisterServices(services);
                     Insulation.Bootstrapper.RegisterServices(services, options, true);
                 });
+
+            if (!String.IsNullOrEmpty(options.MetricOptions.Provider))
+                ConfigureMetricsReporting(builder, options.MetricOptions);
 
             return builder;
         }
@@ -170,7 +169,7 @@ namespace Exceptionless.Job {
                 services.AddJob<WorkItemJob>(true);
         }
 
-        private static void ConfigureMetricsReporting(IWebHostBuilder builder, MetricOptions options) {
+        private static void ConfigureMetricsReporting(IHostBuilder builder, MetricOptions options) {
             if (String.Equals(options.Provider, "prometheus")) {
                 var metrics = AppMetrics.CreateDefaultBuilder()
                     .OutputMetrics.AsPrometheusPlainText()
