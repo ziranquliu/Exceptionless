@@ -27,7 +27,6 @@ az aks update-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER --res
 az aks create \
     --resource-group $RESOURCE_GROUP \
     --name $CLUSTER \
-    --kubernetes-version 1.14.8 \
     --node-count 3 \
     --node-vm-size Standard_D8s_v3 \
     --max-pods 50 \
@@ -43,9 +42,9 @@ az aks create \
 
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER --overwrite-existing
 
-# install dashboard, using 2.0 rc7 that supports CRDs (elastic operator)
+# install dashboard
 # https://github.com/kubernetes/dashboard/releases
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-rc7/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.1/aio/deploy/recommended.yaml
 
 # create admin user to login to the dashboard
 kubectl apply -f admin-service-account.yaml
@@ -56,7 +55,7 @@ kubectl config set-context --current --namespace=ex-$ENV
 # setup elasticsearch operator
 # https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-quickstart.html
 # https://github.com/elastic/cloud-on-k8s/releases
-kubectl apply -f https://download.elastic.co/downloads/eck/1.0.1/all-in-one.yaml
+kubectl apply -f https://download.elastic.co/downloads/eck/1.1.2/all-in-one.yaml
 
 # view ES operator logs
 kubectl -n elastic-system logs -f statefulset.apps/elastic-operator
@@ -84,14 +83,27 @@ az network public-ip update --ids $PUBLICIPID --dns-name $CLUSTER
 
 # install cert-manager
 # https://github.com/jetstack/cert-manager/releases
-kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/v0.14.1/deploy/manifests/00-crds.yaml
+kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.15.1/cert-manager.crds.yaml
 kubectl create namespace cert-manager
 kubectl apply -f cluster-issuer.yaml
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --set ingressShim.defaultIssuerName=letsencrypt-prod --set ingressShim.defaultIssuerKind=ClusterIssuer
 
+# install kubecost
+# https://kubecost.com/install?ref=home
+kubectl create namespace kubecost
+helm repo add kubecost https://kubecost.github.io/cost-analyzer/
+helm install kubecost kubecost/cost-analyzer --namespace kubecost --set kubecostToken=$KUBECOST_KEY
+
+# install goldilocks
+helm repo add fairwinds-stable https://charts.fairwinds.com/stable
+helm install goldilocks fairwinds-stable/goldilocks --namespace goldilocks
+
 # TODO: update this file using the cluster name for the dns
 kubectl apply -f certificates.yaml
 kubectl describe certificate -n tls-secret
+
+# apply namespace default limits
+kubectl apply -f namespace-default-limits.yaml
 
 # install redis server
 helm repo add bitnami https://charts.bitnami.com/bitnami

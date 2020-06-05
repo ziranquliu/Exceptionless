@@ -1,3 +1,6 @@
+ARG UI_VERSION=ui:2.9.0
+FROM exceptionless/${UI_VERSION} AS ui
+
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /app
 
@@ -52,13 +55,35 @@ WORKDIR /app
 COPY --from=api-publish /app/src/Exceptionless.Web/out ./
 ENTRYPOINT [ "dotnet", "Exceptionless.Web.dll" ]
 
-# everything
+# app
 
-FROM exceptionless/elasticsearch:7.7.0 AS exceptionless
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS app
+
 WORKDIR /app
 COPY --from=api-publish /app/src/Exceptionless.Web/out ./
-COPY --from=exceptionless/ui:latest /app ./wwwroot
-COPY --from=exceptionless/ui:latest /usr/local/bin/bootstrap /usr/local/bin/bootstrap
+COPY --from=ui /app ./wwwroot
+COPY --from=ui /usr/local/bin/bootstrap /usr/local/bin/bootstrap
+COPY ./build/docker-entrypoint.sh ./
+COPY ./build/supervisord.conf /etc/
+
+ENV EX_ConnectionStrings__Storage=provider=folder;path=/app/storage \
+    EX_RunJobsInProcess=true \
+    ASPNETCORE_URLS=http://+:80 \
+    EX_Html5Mode=true
+
+EXPOSE 80
+
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
+CMD [ "dotnet", "Exceptionless.Web.dll" ]
+
+# completely self-contained
+
+FROM exceptionless/elasticsearch:7.7.1 AS exceptionless
+
+WORKDIR /app
+COPY --from=api-publish /app/src/Exceptionless.Web/out ./
+COPY --from=ui /app ./wwwroot
+COPY --from=ui /usr/local/bin/bootstrap /usr/local/bin/bootstrap
 COPY ./build/docker-entrypoint.sh ./
 COPY ./build/supervisord.conf /etc/
 
@@ -70,12 +95,13 @@ RUN rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-p
 
 ENV discovery.type=single-node \
     xpack.security.enabled=false \
-    ASPNETCORE_URLS=http://+:5000 \
-    EX_ApiUrl=http://localhost:5000 \
+    ES_JAVA_OPTS="-Xms1g -Xmx1g" \
+    ASPNETCORE_URLS=http://+:80 \
     DOTNET_RUNNING_IN_CONTAINER=true \
     EX_ConnectionStrings__Storage=provider=folder;path=/app/storage \
-    EX_RunJobsInProcess=true
+    EX_RunJobsInProcess=true \
+    EX_Html5Mode=true
 
-EXPOSE 5000 9200
+EXPOSE 80 9200
 
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
