@@ -8,7 +8,7 @@ api:
     - dev-api.exceptionless.io
 app:
   image:
-    repository: exceptionless/ui-ci
+    tag: "2.9.0"
   defaultDomain: dev-app.exceptionless.io
   domains:
     - dev-app.exceptionless.io
