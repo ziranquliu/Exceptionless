@@ -96,8 +96,15 @@ namespace Exceptionless.Tests {
 
             services.AddSingleton<IMailer, NullMailer>();
             services.AddSingleton<IDomainLoginProvider, TestDomainLoginProvider>();
+            services.AddTransient<DataBuilder>();
             
             services.ReplaceSingleton(s => _server.CreateHandler());
+        }
+
+        protected async Task CreateTestData(Action<DataBuilder> builder) {
+            var dataBuilder = GetService<DataBuilder>();
+            builder(dataBuilder);
+            await dataBuilder.BuildAsync();
         }
 
         protected virtual async Task ResetDataAsync() {

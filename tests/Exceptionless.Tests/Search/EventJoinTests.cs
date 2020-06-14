@@ -25,28 +25,29 @@ namespace Exceptionless.Tests.Repositories {
             _stackRepository = GetService<IStackRepository>();
             _eventRepository = GetService<IEventRepository>();
         }
-        
-        protected override async Task ResetDataAsync() {
-            await base.ResetDataAsync();
-            
-            var oldLoggingLevel = Log.MinimumLevel;
-            Log.MinimumLevel = LogLevel.Warning;
-            
-            await StackData.CreateSearchDataAsync(_stackRepository, GetService<JsonSerializer>());
-            await EventData.CreateSearchDataAsync(GetService<ExceptionlessElasticConfiguration>(), _eventRepository, GetService<EventParserPluginManager>());
-            
-            Log.MinimumLevel = oldLoggingLevel;
-        }
+
         [Theory]
         [InlineData("status:fixed", 2)]
         [InlineData("status:regressed", 1)]
         [InlineData("@stack(status:open)", 1)]
         public async Task GetByStatusAsync(string filter, int count) {
-            var result = await GetByFilterAsync(filter);
+            await CreateTestData(d => {
+                d.AddErrorEvent().Fixed("1.2.3");
+                d.AddErrorEvent();
+            });
+
+            var result = await _eventRepository.QueryAsync(q => q.FilterExpression(filter));
             Assert.NotNull(result);
             Assert.Equal(count, result.Total);
         }
-        
+
+        [Fact]
+        public async Task CanQueryFixedStatus() {
+            var result = await _eventRepository.QueryAsync(q => q.FilterExpression("status:open"));
+            Assert.NotNull(result);
+            Assert.Equal(1, result.Total);
+        }
+
         [Theory]
         [InlineData("is_fixed:true", 1)]
         [InlineData("status:fixed", 1)] // Returns 1 because there is two fixed stacks but only one fixed event.
@@ -64,14 +65,22 @@ namespace Exceptionless.Tests.Repositories {
             Log.SetLogLevel<StackRepository>(LogLevel.Trace);
             Log.SetLogLevel<EventJoinFilterVisitor>(LogLevel.Trace);
             Log.SetLogLevel<StackFieldResolverQueryVisitor>(LogLevel.Trace);
-            
-            var result = await GetByFilterAsync(filter);
+
+            var result = await _eventRepository.QueryAsync(q => q.FilterExpression(filter));
             Assert.NotNull(result);
             Assert.Equal(count, result.Total);
         }
-        
-        private Task<QueryResults<PersistentEvent>> GetByFilterAsync(string filter) {
-            return _eventRepository.QueryAsync(q => q.FilterExpression(filter));
+
+        protected override async Task ResetDataAsync() {
+            await base.ResetDataAsync();
+
+            var oldLoggingLevel = Log.MinimumLevel;
+            Log.MinimumLevel = LogLevel.Warning;
+
+            await StackData.CreateSearchDataAsync(_stackRepository, GetService<JsonSerializer>());
+            await EventData.CreateSearchDataAsync(GetService<ExceptionlessElasticConfiguration>(), _eventRepository, GetService<EventParserPluginManager>());
+
+            Log.MinimumLevel = oldLoggingLevel;
         }
     }
 }
