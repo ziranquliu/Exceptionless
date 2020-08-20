@@ -14,7 +14,7 @@
 [Dd]ebug/
 [Rr]elease/
 x64/
-[Bb]in/
+# [Bb]in/
 [Oo]bj/
 published/
 
@@ -109,7 +109,7 @@ $RECYCLE.BIN/
 dump.rdb
 
 #App
-App_Data
+# App_Data
 /.vs
 
 *.DS_Store
@@ -125,3 +125,8 @@ k8s/ex-prod\.diff
 k8s/ex-prod\.yaml
 k8s/ex-*-secrets\.sh
 k8s/ex-*-snapshots.yaml
+Exceptionless.4.1.2861/elasticsearch-5.5.2/
+Exceptionless.4.1.2861/elasticsearch-5.5.2-node1/
+Exceptionless.4.1.2861/kibana-5.5.2-windows-x86/
+Exceptionless.4.1.2861/wwwroot/Logs/
+Exceptionless.4.1.2861/kibana-5.5.2/

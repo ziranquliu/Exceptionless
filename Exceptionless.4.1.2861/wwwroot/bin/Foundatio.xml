@@ -1,0 +1,794 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Foundatio</name>
+    </assembly>
+    <members>
+        <member name="M:Foundatio.Utility.EnumExtensions.TryEnumIsDefined(System.Type,System.Object)">
+            <summary>
+            Will try and parse an enum and it's default type.
+            </summary>
+            <param name="type"></param>
+            <param name="value"></param>
+            <returns>True if the enum value is defined.</returns>
+        </member>
+        <member name="T:Foundatio.Utility.DisposableAction">
+            <summary>
+            A class that will call an <see cref="T:System.Action"/> when Disposed.
+            </summary>
+        </member>
+        <member name="M:Foundatio.Utility.DisposableAction.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Foundatio.Utility.DisposableAction"/> class.
+            </summary>
+            <param name="exitAction">The exit action.</param>
+        </member>
+        <member name="M:Foundatio.Utility.DisposableAction.System#IDisposable#Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Foundatio.Jobs.IQueueJob`1.ProcessAsync(Foundatio.Queues.IQueueEntry{`0},System.Threading.CancellationToken)">
+            <summary>
+            Processes a queue entry and returns the result. This method is typically called from RunAsync() 
+            but can also be called from a function passing in the queue entry.
+            </summary>
+        </member>
+        <member name="T:Foundatio.Logging.ILogBuilder">
+            <summary>
+            A fluent <see langword="interface"/> to build log messages.
+            </summary>
+        </member>
+        <member name="P:Foundatio.Logging.ILogBuilder.LogData">
+            <summary>
+            Gets the log data that is being built.
+            </summary>
+            <value>
+            The log data.
+            </value>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.Func{System.String})">
+            <summary>
+            Sets the log message on the logging event.
+            </summary>
+            <param name="messageFormatter">The message formatter <see langword="delegate"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.String)">
+            <summary>
+            Sets the log message on the logging event.
+            </summary>
+            <param name="message">The log message for the logging event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.String,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.String,System.Object,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The first object to format.</param>
+            <param name="arg1">The second object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The first object to format.</param>
+            <param name="arg1">The second object to format.</param>
+            <param name="arg2">The third object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.String,System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The first object to format.</param>
+            <param name="arg1">The second object to format.</param>
+            <param name="arg2">The third object to format.</param>
+            <param name="arg3">The fourth object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.String,System.Object[])">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Message(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Property(System.String,System.Object)">
+            <summary>
+            Sets a log context property on the logging event.
+            </summary>
+            <param name="name">The name of the context property.</param>
+            <param name="value">The value of the context property.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">name</exception>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Exception(System.Exception)">
+            <summary>
+            Sets the exception information of the logging event.
+            </summary>
+            <param name="exception">The exception information of the logging event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.Write(System.String,System.String,System.Int32)">
+            <summary>
+            Writes the log event to the underlying logger.
+            </summary>
+            <param name="callerMemberName">The method or property name of the caller to the method. This is set at by the compiler.</param>
+            <param name="callerFilePath">The full path of the source file that contains the caller. This is set at by the compiler.</param>
+            <param name="callerLineNumber">The line number in the source file at which the method is called. This is set at by the compiler.</param>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.WriteIf(System.Func{System.Boolean},System.String,System.String,System.Int32)">
+            <summary>
+            Writes the log event to the underlying logger if the condition delegate is true.
+            </summary>
+            <param name="condition">If condition is true, write log event; otherwise ignore event.</param>
+            <param name="callerMemberName">The method or property name of the caller to the method. This is set at by the compiler.</param>
+            <param name="callerFilePath">The full path of the source file that contains the caller. This is set at by the compiler.</param>
+            <param name="callerLineNumber">The line number in the source file at which the method is called. This is set at by the compiler.</param>
+        </member>
+        <member name="M:Foundatio.Logging.ILogBuilder.WriteIf(System.Boolean,System.String,System.String,System.Int32)">
+            <summary>
+            Writes the log event to the underlying logger if the condition is true.
+            </summary>
+            <param name="condition">If condition is true, write log event; otherwise ignore event.</param>
+            <param name="callerMemberName">The method or property name of the caller to the method. This is set at by the compiler.</param>
+            <param name="callerFilePath">The full path of the source file that contains the caller. This is set at by the compiler.</param>
+            <param name="callerLineNumber">The line number in the source file at which the method is called. This is set at by the compiler.</param>
+        </member>
+        <member name="T:Foundatio.Logging.LogBuilder">
+            <summary>
+            A fluent <see langword="interface"/> to build log messages.
+            </summary>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.#ctor(Foundatio.Logging.LogLevel,Foundatio.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Foundatio.Logging.LogBuilder" /> class.
+            </summary>
+            <param name="logLevel">The starting trace level.</param>
+            <param name="logger">The delegate to write logs to.</param>
+            <exception cref="T:System.ArgumentNullException">writer</exception>
+        </member>
+        <member name="P:Foundatio.Logging.LogBuilder.LogData">
+            <summary>
+            Gets the log data that is being built.
+            </summary>
+            <value>
+            The log data.
+            </value>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.EventId(System.Int32)">
+            <summary>
+            Sets the id of the logging event.
+            </summary>
+            <param name="eventId">The id of the logging event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.String)">
+            <summary>
+            Sets the log message on the logging event.
+            </summary>
+            <param name="message">The log message for the logging event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.Func{System.String})">
+            <summary>
+            Sets the log message on the logging event.
+            </summary>
+            <param name="messageFormatter">The message formatter <see langword="delegate"/>.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.String,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.String,System.Object,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The first object to format.</param>
+            <param name="arg1">The second object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The first object to format.</param>
+            <param name="arg1">The second object to format.</param>
+            <param name="arg2">The third object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.String,System.Object,System.Object,System.Object,System.Object)">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="arg0">The first object to format.</param>
+            <param name="arg1">The second object to format.</param>
+            <param name="arg2">The third object to format.</param>
+            <param name="arg3">The fourth object to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.String,System.Object[])">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Message(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Sets the log message and parameters for formating on the logging event.
+            </summary>
+            <param name="provider">An object that supplies culture-specific formatting information.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Property(System.String,System.Object)">
+            <summary>
+            Sets a log context property on the logging event.
+            </summary>
+            <param name="name">The name of the context property.</param>
+            <param name="value">The value of the context property.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">name</exception>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Exception(System.Exception)">
+            <summary>
+            Sets the exception information of the logging event.
+            </summary>
+            <param name="exception">The exception information of the logging event.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.Write(System.String,System.String,System.Int32)">
+            <summary>
+            Writes the log event to the underlying logger.
+            </summary>
+            <param name="callerMemberName">The method or property name of the caller to the method. This is set at by the compiler.</param>
+            <param name="callerFilePath">The full path of the source file that contains the caller. This is set at by the compiler.</param>
+            <param name="callerLineNumber">The line number in the source file at which the method is called. This is set at by the compiler.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.WriteIf(System.Func{System.Boolean},System.String,System.String,System.Int32)">
+            <summary>
+            Writes the log event to the underlying logger if the condition delegate is true.
+            </summary>
+            <param name="condition">If condition is true, write log event; otherwise ignore event.</param>
+            <param name="callerMemberName">The method or property name of the caller to the method. This is set at by the compiler.</param>
+            <param name="callerFilePath">The full path of the source file that contains the caller. This is set at by the compiler.</param>
+            <param name="callerLineNumber">The line number in the source file at which the method is called. This is set at by the compiler.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilder.WriteIf(System.Boolean,System.String,System.String,System.Int32)">
+            <summary>
+            Writes the log event to the underlying logger if the condition is true.
+            </summary>
+            <param name="condition">If condition is true, write log event; otherwise ignore event.</param>
+            <param name="callerMemberName">The method or property name of the caller to the method. This is set at by the compiler.</param>
+            <param name="callerFilePath">The full path of the source file that contains the caller. This is set at by the compiler.</param>
+            <param name="callerLineNumber">The line number in the source file at which the method is called. This is set at by the compiler.</param>
+        </member>
+        <member name="T:Foundatio.Logging.LogData">
+            <summary>
+            A class holding log data before being written.
+            </summary>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.LogLevel">
+            <summary>
+            Gets or sets the trace level.
+            </summary>
+            <value>
+            The trace level.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.EventId">
+            <summary>
+            Gets or sets the event id.
+            </summary>
+            <value>
+            The event id.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.MessageFormatter">
+            <summary>
+            Gets or sets the message formatter <see langword="delegate"/>.
+            </summary>
+            <value>
+            The message formatter <see langword="delegate"/>.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.Parameters">
+            <summary>
+            Gets or sets the message parameters. Used with String.Format.
+            </summary>
+            <value>
+            The parameters.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.FormatProvider">
+            <summary>
+            Gets or sets the format provider.
+            </summary>
+            <value>
+            The format provider.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.Exception">
+            <summary>
+            Gets or sets the exception.
+            </summary>
+            <value>
+            The exception.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.MemberName">
+            <summary>
+            Gets or sets the name of the member.
+            </summary>
+            <value>
+            The name of the member.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.FilePath">
+            <summary>
+            Gets or sets the file path.
+            </summary>
+            <value>
+            The file path.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.LineNumber">
+            <summary>
+            Gets or sets the line number.
+            </summary>
+            <value>
+            The line number.
+            </value>
+        </member>
+        <member name="P:Foundatio.Logging.LogData.Properties">
+            <summary>
+            Gets or sets the log properties.
+            </summary>
+            <value>
+            The log properties.
+            </value>
+        </member>
+        <member name="M:Foundatio.Logging.LogData.ToString">
+            <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+        </member>
+        <member name="T:Foundatio.Logging.Internal.FormattedLogValues">
+            <summary>
+            LogValues to enable formatting options supported by <see cref="M:string.Format"/>. 
+            This also enables using {NamedformatItem} in the format string.
+            </summary>
+        </member>
+        <member name="T:Foundatio.Logging.Internal.LogValuesFormatter">
+            <summary>
+            Formatter to convert the named format items like {NamedformatItem} to <see cref="M:string.Format"/> format.
+            </summary>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Debug(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a debug log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Debug(Foundatio.Logging.ILogger,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a debug log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Debug(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.String,System.Object[])">
+            <summary>
+            Formats and writes a debug log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Debug(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats and writes a debug log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Trace(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a trace log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Trace(Foundatio.Logging.ILogger,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a trace log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Trace(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.String,System.Object[])">
+            <summary>
+            Formats and writes a trace log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Trace(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats and writes a trace log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Info(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes an informational log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Info(Foundatio.Logging.ILogger,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes an informational log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Info(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.String,System.Object[])">
+            <summary>
+            Formats and writes an informational log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Info(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats and writes an informational log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Warn(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a warning log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Warn(Foundatio.Logging.ILogger,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a warning log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Warn(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.String,System.Object[])">
+            <summary>
+            Formats and writes a warning log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Warn(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats and writes a warning log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Error(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes an error log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Error(Foundatio.Logging.ILogger,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes an error log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Error(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.String,System.Object[])">
+            <summary>
+            Formats and writes an error log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Error(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats and writes an error log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Critical(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a critical log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Critical(Foundatio.Logging.ILogger,System.Exception,System.String,System.Object[])">
+            <summary>
+            Formats and writes a critical log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="exception">The exception to log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Critical(Foundatio.Logging.ILogger,Foundatio.Logging.EventId,System.String,System.Object[])">
+            <summary>
+            Formats and writes a critical log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="eventId">The event id associated with the log.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Foundatio.Logging.LoggerExtensions.Critical(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats and writes a critical log message.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to write to.</param>
+            <param name="message">Format string of the log message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="T:Foundatio.Logging.LogLevel">
+            <summary>
+            Defines logging severity levels.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.Trace">
+            <summary>
+            Logs that contain the most detailed messages. These messages may contain sensitive application data.
+            These messages are disabled by default and should never be enabled in a production environment.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.Debug">
+            <summary>
+            Logs that are used for interactive investigation during development.  These logs should primarily contain
+            information useful for debugging and have no long-term value.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.Information">
+            <summary>
+            Logs that track the general flow of the application. These logs should have long-term value.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.Warning">
+            <summary>
+            Logs that highlight an abnormal or unexpected event in the application flow, but do not otherwise cause the
+            application execution to stop.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.Error">
+            <summary>
+            Logs that highlight when the current flow of execution is stopped due to a failure. These should indicate a
+            failure in the current activity, not an application-wide failure.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.Critical">
+            <summary>
+            Logs that describe an unrecoverable application or system crash, or a catastrophic failure that requires
+            immediate attention.
+            </summary>
+        </member>
+        <member name="F:Foundatio.Logging.LogLevel.None">
+            <summary>
+            Not used for writing log messages. Specifies that a logging category should not write any messages.
+            </summary>
+        </member>
+        <member name="M:Foundatio.Logging.ScopeExtensions.BeginScope(Foundatio.Logging.ILogger,System.String,System.Object[])">
+            <summary>
+            Formats the message and creates a scope.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to create the scope in.</param>
+            <param name="messageFormat">Format string of the scope message.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+            <returns>A disposable scope object. Can be null.</returns>
+        </member>
+        <member name="M:Foundatio.Logging.ScopeExtensions.BeginScope(Foundatio.Logging.ILogger,System.Action{Foundatio.Logging.PropertyBuilder})">
+            <summary>
+            Creates a scoped log using a builder.
+            </summary>
+            <param name="logger">The <see cref="T:Foundatio.Logging.ILogger"/> to create the scope in.</param>
+            <param name="builder">The scope builder used to build the scope.</param>
+            <returns>A disposable scope object. Can be null.</returns>
+        </member>
+        <member name="P:Foundatio.Messaging.MessageBusOptionsBase.Topic">
+            <summary>
+            The topic name
+            </summary>
+        </member>
+        <member name="M:Foundatio.Queues.IQueue`1.StartWorkingAsync(System.Func{Foundatio.Queues.IQueueEntry{`0},System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+                Asynchronously dequeues entries in the background.
+            </summary>
+            <param name="handler">
+                Function called on entry dequeued.
+            </param>
+            <param name="autoComplete">
+                True to call <see cref="M:Foundatio.Queues.IQueue`1.CompleteAsync(Foundatio.Queues.IQueueEntry{`0})"/> after the <paramref name="handler"/> is run,
+                defaults to false.
+            </param>
+            <param name="cancellationToken">
+                The token used to cancel the background worker.
+            </param>
+        </member>
+        <member name="P:Foundatio.Storage.FileSpec.Size">
+            <summary>
+            In Bytes
+            </summary>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionBuilder.GenerateFieldBasedPrimitiveArrayTransferExpressions(System.Type,System.Linq.Expressions.Expression)">
+            <summary>
+            Generates state transfer expressions to copy an array of primitive types
+            </summary>
+            <param name="elementType">Type of array that will be cloned</param>
+            <param name="source">Variable expression for the original array</param>
+            <returns>The variable holding the cloned array</returns>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionBuilder.GenerateFieldBasedComplexArrayTransferExpressions(System.Type,System.Type,System.Linq.Expressions.Expression,System.Collections.Generic.ICollection{System.Linq.Expressions.ParameterExpression},System.Collections.Generic.ICollection{System.Linq.Expressions.Expression})">
+            <summary>
+            Generates state transfer expressions to copy an array of complex types
+            </summary>
+            <param name="arrayType">Type of array that will be cloned</param>
+            <param name="elementType">Type of the elements of the array</param>
+            <param name="originalArray">Variable expression for the original array</param>
+            <param name="arrayVariables">Receives variables used by the transfer expressions</param>
+            <param name="arrayExpressions">Receives the generated transfer expressions</param>
+            <returns>The variable holding the cloned array</returns>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionBuilder.GenerateFieldBasedComplexTypeTransferExpressions(System.Type,System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Collections.Generic.ICollection{System.Linq.Expressions.Expression})">
+            <summary>
+            Generates state transfer expressions to copy a complex type
+            </summary>
+            <param name="complexType">Complex type that will be cloned</param>
+            <param name="source">Variable expression for the original instance</param>
+            <param name="target">Variable expression for the cloned instance</param>
+            <param name="expression">Receives the generated transfer expressions</param>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionBuilder.GenerateFieldBasedReferenceTypeTransferExpressions(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Collections.Generic.ICollection{System.Linq.Expressions.Expression},System.Reflection.FieldInfo)">
+            <summary>
+            Generates the expressions to transfer a reference type (array or class)
+            </summary>
+            <param name="original">Original value that will be cloned</param>
+            <param name="clone">Variable that will receive the cloned value</param>
+            <param name="expressions">
+            Receives the expression generated to transfer the values
+            </param>
+            <param name="fieldInfo">Reflection informations about the field being cloned</param>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionBuilder.GetFieldInfosIncludingBaseClasses(System.Type,System.Reflection.BindingFlags)">
+            <summary>
+            Returns all the fields of a type, working around a weird reflection issue
+            where explicitly declared fields in base classes are returned, but not
+            automatic property backing fields.
+            </summary>
+            <param name="type">Type whose fields will be returned</param>
+            <param name="bindingFlags">Binding flags to use when querying the fields</param>
+            <returns>All of the type's fields, including its base types</returns>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionHelper.CreateCopyFieldExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.FieldInfo)">
+            <summary>
+            Creates an expression that copies a value from the original to the clone.
+            </summary>
+            <param name="original"></param>
+            <param name="clone"></param>
+            <param name="fieldInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionHelper.CreateCopyComplexFieldExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Reflection.FieldInfo,System.Linq.Expressions.ParameterExpression)">
+            <summary>
+            Creates an expression that copies a coplex value from the source to the target. The value will be cloned as well using the dictionary to reuse already cloned objects.
+            </summary>
+            <param name="original"></param>
+            <param name="clone"></param>
+            <param name="fieldInfo"></param>
+            <param name="objectDictionary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:FastClone.Internal.CloneExpressionHelper.CreateCopyComplexArrayTypeFieldExpression(System.Linq.Expressions.Expression,System.Linq.Expressions.Expression,System.Type,System.Linq.Expressions.ParameterExpression)">
+            <summary>
+            Creates an expression that copies a coplex array value from the source to the target. The value will be cloned as well using the dictionary to reuse already cloned objects.
+            </summary>
+            <param name="sourceField"></param>
+            <param name="targetField"></param>
+            <param name="type"></param>
+            <param name="objectDictionary"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

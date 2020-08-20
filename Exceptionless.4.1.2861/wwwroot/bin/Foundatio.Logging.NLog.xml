@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Foundatio.Logging.NLog</name>
+    </assembly>
+    <members>
+        <member name="M:Foundatio.Logging.NLog.LogFactoryExtensions.AddNLog(Foundatio.Logging.ILoggerFactory)">
+            <summary>
+            Enable NLog as logging provider in Foundatio.
+            </summary>
+            <param name="factory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.NLog.LogFactoryExtensions.AddNLog(Foundatio.Logging.ILoggerFactory,System.Action{System.Object,System.Object[],NLog.LogEventInfo})">
+            <summary>
+            Enable NLog as logging provider in Foundatio.
+            </summary>
+            <param name="factory"></param>
+            <param name="populateAdditionalLogEventInfo">Callback that allows populating additional log event information from the log state and scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Foundatio.Logging.NLog.LogFactoryExtensions.ConfigureNLog(System.String)">
+            <summary>
+            Apply NLog configuration from XML config.
+            </summary>
+            <param name="fileName">absolute path  NLog configuration file.</param>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,1414 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Exceptionless.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.LoginAsync(Exceptionless.Api.Models.LoginModel)">
+             <summary>
+             Login
+             </summary>
+             <remarks>
+             Log in with your email address and password to generate a token scoped with your users roles.
+            
+             <code>{ "email": "noreply@exceptionless.io", "password": "exceptionless" }</code>
+            
+             This token can then be used to access the api. You can use this token in the header (bearer authentication)
+             or append it onto the query string: ?access_token=MY_TOKEN
+            
+             Please note that you can also use this token on the documentation site by placing it in the
+             headers api_key input box.
+             </remarks>
+             <param name="model">The login model.</param>
+             <response code="400">The login model is invalid.</response>
+             <response code="401">Login failed.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.SignupAsync(Exceptionless.Api.Models.SignupModel)">
+            <summary>
+            Sign up
+            </summary>
+            <param name="model">The sign up model.</param>
+            <response code="400">The sign up model is invalid.</response>
+            <response code="401">Sign up failed.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.RemoveExternalLoginAsync(System.String,System.String)">
+            <summary>
+            Removes an external login provider from the account
+            </summary>
+            <param name="providerName">The provider name.</param>
+            <param name="providerUserId">The provider user id.</param>
+            <response code="400">Invalid provider name.</response>
+            <response code="500">An error while saving the user account.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.ChangePasswordAsync(Exceptionless.Api.Models.ChangePasswordModel)">
+            <summary>
+            Change password
+            </summary>
+            <param name="model">The change password model.</param>
+            <response code="400">Invalid change password model.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.ForgotPasswordAsync(System.String)">
+            <summary>
+            Forgot password
+            </summary>
+            <param name="email">The email address.</param>
+            <response code="400">Invalid email address.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.ResetPasswordAsync(Exceptionless.Api.Models.ResetPasswordModel)">
+            <summary>
+            Reset password
+            </summary>
+            <param name="model">The reset password model.</param>
+            <response code="400">Invalid reset password model.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.AuthController.CancelResetPasswordAsync(System.String)">
+            <summary>
+            Cancel reset password
+            </summary>
+            <param name="token">The password reset token.</param>
+            <response code="400">Invalid password reset token.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetCountAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Count
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="aggregations">A list of values you want returned. Example: avg:value cardinality:value sum:users max:value min:value</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetCountByOrganizationAsync(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Count by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="aggregations">A list of values you want returned. Example: avg:value cardinality:value sum:users max:value min:value</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetCountByProjectAsync(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Count by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="aggregations">A list of values you want returned. Example: avg:value cardinality:value sum:users max:value min:value</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetByIdAsync(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the event.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <response code="404">The event occurrence could not be found.</response>
+            <response code="426">Unable to view event occurrence due to plan limits.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get all
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The organization could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetByStackAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by stack
+            </summary>
+            <param name="stackId">The identifier of the stack.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The stack could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetByReferenceIdAsync(System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by reference id
+            </summary>
+            <param name="referenceId">An identifier used that references an event instance.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetByReferenceIdAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by reference id
+            </summary>
+            <param name="referenceId">An identifier used that references an event instance.</param>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetBySessionIdAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get a list of all sessions or events by a session id
+            </summary>
+            <param name="sessionId">An identifier that represents a session of events.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetBySessionIdAndProjectAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get a list of by a session id
+            </summary>
+            <param name="sessionId">An identifier that represents a session of events.</param>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetSessionsAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get a list of all sessions
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetSessionByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get a list of all sessions
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetSessionByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get a list of all sessions
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole event object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view event occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.SetUserDescriptionAsync(System.String,Exceptionless.Core.Models.Data.UserDescription,System.String)">
+            <summary>
+            Set user description
+            </summary>
+            <remarks>You can also save an end users contact information and a description of the event. This is really useful for error events as a user can specify reproduction steps in the description.</remarks>
+            <param name="referenceId">An identifier used that references an event instance.</param>
+            <param name="description">The user description.</param>
+            <param name="projectId">The identifier of the project.</param>
+            <response code="400">Description must be specified.</response>
+            <response code="404">The event occurrence with the specified reference id could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.RecordHeartbeatAsync(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            Submit heartbeat
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="version">The api version that should be used.</param>
+            <param name="id">The session id or user id.</param>
+            <param name="close">If true, the session will be closed.</param>
+            <response code="200">OK</response>
+            <response code="400">No project id specified and no default project was found.</response>
+            <response code="404">No project was found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.GetSubmitEventAsync(System.String,System.Int32,System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.String[]})">
+             <summary>
+             Create
+             </summary>
+             <remarks>
+             You can create an event using query string parameters.
+            
+             Feature usage named build with a duration of 10:
+             <code><![CDATA[/events/submit?access_token=YOUR_API_KEY&type=usage&source=build&value=10]]></code>
+             OR
+             <code><![CDATA[/events/submit/usage?access_token=YOUR_API_KEY&source=build&value=10]]></code>
+            
+             Log with message, geo and extended data
+             <code><![CDATA[/events/submit?access_token=YOUR_API_KEY&type=log&message=Hello World&source=server01&geo=32.85,-96.9613&randomproperty=true]]></code>
+             OR
+             <code><![CDATA[/events/submit/log?access_token=YOUR_API_KEY&message=Hello World&source=server01&geo=32.85,-96.9613&randomproperty=true]]></code>
+             </remarks>
+             <param name="projectId">The identifier of the project.</param>
+             <param name="version">The api version that should be used</param>
+             <param name="type">The event type</param>
+             <param name="userAgent">The user agent that submitted the event.</param>
+             <param name="parameters">Parameters that control what properties are set on the event</param>
+             <response code="200">OK</response>
+             <response code="400">No project id specified and no default project was found.</response>
+             <response code="404">No project was found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.PostAsync(System.Byte[],System.String,System.Int32,System.String)">
+             <summary>
+             Create
+             </summary>
+             <remarks>
+             You can create an event by posting any uncompressed or compressed (gzip or deflate) string or json object. If we know how to handle it
+             we will create a new event. If none of the JSON properties match the event object then we will create a new event and place your JSON
+             object into the events data collection.
+            
+             You can also post a multi-line string. We automatically split strings by the \n character and create a new log event for every line.
+            
+             Simple event:
+             <code>
+                 { "message": "Exceptionless is amazing!" }
+             </code>
+             
+             Simple log event with user identity:
+             <code>
+                 {
+                     "type": "log",
+                     "message": "Exceptionless is amazing!",
+                     "date":"2020-01-01T12:00:00.0000000-05:00",
+                     "@user":{ "identity":"123456789", "name": "Test User" }
+                 }
+             </code>
+            
+             Multiple events from string content:
+             <code>
+                 Exceptionless is amazing!
+                 Exceptionless is really amazing!
+             </code>
+            
+             Simple error:
+             <code>
+                 {
+                     "type": "error",
+                     "date":"2020-01-01T12:00:00.0000000-05:00",
+                     "@simple_error": {
+                         "message": "Simple Exception",
+                         "type": "System.Exception",
+                         "stack_trace": "   at Client.Tests.ExceptionlessClientTests.CanSubmitSimpleException() in ExceptionlessClientTests.cs:line 77"
+                     }
+                 }
+             </code>
+             </remarks>
+             <param name="data">The raw data.</param>
+             <param name="projectId">The identifier of the project.</param>
+             <param name="version">The api version that should be used</param>
+             <param name="userAgent">The user agent that submitted the event.</param>
+             <response code="202">Accepted</response>
+             <response code="400">No project id specified and no default project was found.</response>
+             <response code="404">No project was found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.EventController.DeleteAsync(System.String)">
+            <summary>
+            Remove
+            </summary>
+            <param name="ids">A comma delimited list of event identifiers.</param>
+            <response code="204">No Content.</response>
+            <response code="400">One or more validation errors occurred.</response>
+            <response code="404">One or more event occurrences were not found.</response>
+            <response code="500">An error occurred while deleting one or more event occurrences.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.GetAsync(System.String)">
+            <summary>
+            Get all
+            </summary>
+            <param name="mode">If no mode is set then the a light weight organization object will be returned. If the mode is set to stats than the fully populated object will be returned.</param>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.GetByIdAsync(System.String,System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="mode">If no mode is set then the a light weight organization object will be returned. If the mode is set to stats than the fully populated object will be returned.</param>
+            <response code="404">The organization could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.PostAsync(Exceptionless.Api.Models.NewOrganization)">
+            <summary>
+            Create
+            </summary>
+            <param name="organization">The organization.</param>
+            <returns></returns>
+            <response code="400">An error occurred while creating the organization.</response>
+            <response code="409">The organization already exists.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.PatchAsync(System.String,Exceptionless.Api.Utility.Delta{Exceptionless.Api.Models.NewOrganization})">
+            <summary>
+            Update
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="changes">The changes</param>
+            <response code="400">An error occurred while updating the organization.</response>
+            <response code="404">The organization could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.DeleteAsync(System.String)">
+            <summary>
+            Remove
+            </summary>
+            <param name="ids">A comma delimited list of organization identifiers.</param>
+            <response code="204">No Content.</response>
+            <response code="400">One or more validation errors occurred.</response>
+            <response code="404">One or more organizations were not found.</response>
+            <response code="500">An error occurred while deleting one or more organizations.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.GetInvoiceAsync(System.String)">
+            <summary>
+            Get invoice
+            </summary>
+            <param name="id">The identifier of the invoice.</param>
+            <response code="404">The invoice was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.GetInvoicesAsync(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Get invoices
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="before">A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_bar, your subsequent call can include before=obj_bar in order to fetch the previous page of the list.</param>
+            <param name="after">A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="404">The organization was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.GetPlansAsync(System.String)">
+            <summary>
+            Get plans
+            </summary>
+            <remarks>
+            Gets available plans for a specific organization.
+            </remarks>
+            <param name="id">The identifier of the organization.</param>
+            <response code="404">The organization was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.ChangePlanAsync(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Change plan
+            </summary>
+            <remarks>
+            Upgrades or downgrades the organizations plan.
+            </remarks>
+            <param name="id">The identifier of the organization.</param>
+            <param name="planId">The identifier of the plan.</param>
+            <param name="stripeToken">The token returned from the stripe service.</param>
+            <param name="last4">The last four numbers of the card.</param>
+            <param name="couponId">The coupon id.</param>
+            <response code="404">The organization was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.AddUserAsync(System.String,System.String)">
+            <summary>
+            Add user
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="email">The email address of the user you wish to add to your organization.</param>
+            <response code="404">The organization was not found.</response>
+            <response code="426">Please upgrade your plan to add an additional user.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.RemoveUserAsync(System.String,System.String)">
+            <summary>
+            Remove user
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="email">The email address of the user you wish to remove from your organization.</param>
+            <response code="400">The error occurred while removing the user from your organization</response>
+            <response code="404">The organization was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.PostDataAsync(System.String,System.String,System.String)">
+            <summary>
+            Add custom data
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="key">The key name of the data object.</param>
+            <param name="value">Any string value.</param>
+            <response code="404">The organization was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.DeleteDataAsync(System.String,System.String)">
+            <summary>
+            Remove custom data
+            </summary>
+            <param name="id">The identifier of the organization.</param>
+            <param name="key">The key name of the data object.</param>
+            <response code="404">The organization was not found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.OrganizationController.IsNameAvailableAsync(System.String)">
+            <summary>
+            Check for unique name
+            </summary>
+            <param name="name">The organization name to check.</param>
+            <response code="201">The organization name is available.</response>
+            <response code="204">The organization name is not available.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.GetAsync(System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all
+            </summary>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <param name="mode">If no mode is set then the a light weight project object will be returned. If the mode is set to stats than the fully populated object will be returned.</param>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.GetByOrganizationAsync(System.String,System.Int32,System.Int32,System.String)">
+            <summary>
+            Get all
+            </summary>
+            <param name="organization">The identifier of the organization.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <param name="mode">If no mode is set then the a light weight project object will be returned. If the mode is set to stats than the fully populated object will be returned.</param>
+            <response code="404">The organization could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.GetByIdAsync(System.String,System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="mode">If no mode is set then the a light weight project object will be returned. If the mode is set to stats than the fully populated object will be returned.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.PostAsync(Exceptionless.Api.Models.NewProject)">
+            <summary>
+            Create
+            </summary>
+            <param name="project">The project.</param>
+            <returns></returns>
+            <response code="400">An error occurred while creating the project.</response>
+            <response code="409">The project already exists.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.PatchAsync(System.String,Exceptionless.Api.Utility.Delta{Exceptionless.Api.Models.UpdateProject})">
+            <summary>
+            Update
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="changes">The changes</param>
+            <response code="400">An error occurred while updating the project.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.DeleteAsync(System.String)">
+            <summary>
+            Remove
+            </summary>
+            <param name="ids">A comma delimited list of project identifiers.</param>
+            <response code="204">No Content.</response>
+            <response code="400">One or more validation errors occurred.</response>
+            <response code="404">One or more projects were not found.</response>
+            <response code="500">An error occurred while deleting one or more projects.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.GetConfigAsync(System.String,System.Nullable{System.Int32})">
+            <summary>
+            Get configuration settings
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="v">The client configuration version.</param>
+            <response code="304">The client configuration version is the current version.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.SetConfigAsync(System.String,System.String,System.String)">
+            <summary>
+            Add configuration value
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="key">The key name of the configuration object.</param>
+            <param name="value">The configuration value.</param>
+            <response code="400">Invalid configuration value.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.DeleteConfigAsync(System.String,System.String)">
+            <summary>
+            Remove configuration value
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="key">The key name of the configuration object.</param>
+            <response code="400">Invalid key value.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.ResetDataAsync(System.String)">
+            <summary>
+            Reset project data
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.GetNotificationSettingsAsync(System.String,System.String)">
+            <summary>
+            Get user notification settings
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="userId">The identifier of the user.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.GetIntegrationNotificationSettingsAsync(System.String,System.String)">
+            <summary>
+            Get an integrations notification settings
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="integration">The identifier of the integration.</param>
+            <response code="404">The project or integration could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.SetNotificationSettingsAsync(System.String,System.String,Exceptionless.Core.Models.NotificationSettings)">
+            <summary>
+            Set user notification settings
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="userId">The identifier of the user.</param>
+            <param name="settings">The notification settings.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.SetIntegrationNotificationSettingsAsync(System.String,System.String,Exceptionless.Core.Models.NotificationSettings)">
+            <summary>
+            Set an integrations notification settings
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="integration">The identifier of the user.</param>
+            <param name="settings">The notification settings.</param>
+            <response code="404">The project or integration could not be found.</response>
+            <response code="426">Please upgrade your plan to enable integrations.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.DeleteNotificationSettingsAsync(System.String,System.String)">
+            <summary>
+            Remove user notification settings
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="userId">The identifier of the user.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.PromoteTabAsync(System.String,System.String)">
+            <summary>
+            Promote tab
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="name">The tab name.</param>
+            <response code="400">Invalid tab name.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.DemoteTabAsync(System.String,System.String)">
+            <summary>
+            Demote tab
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="name">The tab name.</param>
+            <response code="400">Invalid tab name.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.IsNameAvailableAsync(System.String,System.String)">
+            <summary>
+            Check for unique name
+            </summary>
+            <param name="name">The project name to check.</param>
+            <param name="organizationId">If set the check name will be scoped to a specific organization.</param>
+            <response code="201">The project name is available.</response>
+            <response code="204">The project name is not available.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.PostDataAsync(System.String,System.String,System.String)">
+            <summary>
+            Add custom data
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="key">The key name of the data object.</param>
+            <param name="value">Any string value.</param>
+            <response code="400">Invalid key or value.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.DeleteDataAsync(System.String,System.String)">
+            <summary>
+            Remove custom data
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="key">The key name of the data object.</param>
+            <response code="400">Invalid key or value.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.AddSlackAsync(System.String,System.String)">
+            <summary>
+            Adds slack integration to the project
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <param name="code">The oauth code that must be exchanged for an auth token.</param>D
+            <response code="400">Invalid code or error contacting slack.</response>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.ProjectController.RemoveSlackAsync(System.String)">
+            <summary>
+            Remove custom data
+            </summary>
+            <param name="id">The identifier of the project.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetByIdAsync(System.String,System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the stack.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the `time` filter. This is used for time zone support.</param>
+            <response code="404">The stack could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkFixedAsync(System.String,System.String)">
+            <summary>
+            Mark fixed
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <param name="version">A version number that the stack was fixed in.</param>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkFixedAsync(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            This controller action is called by zapier to mark the stack as fixed.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.AddLinkAsync(System.String,System.String)">
+            <summary>
+            Add reference link
+            </summary>
+            <param name="id">The identifier of the stack.</param>
+            <param name="url">The reference link.</param>
+            <response code="400">Invalid reference link.</response>
+            <response code="404">The stack could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.AddLinkAsync(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            This controller action is called by zapier to add a reference link to a stack.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.RemoveLinkAsync(System.String,System.String)">
+            <summary>
+            Remove reference link
+            </summary>
+            <param name="id">The identifier of the stack.</param>
+            <param name="url">The reference link.</param>
+            <response code="204">The reference link was removed.</response>
+            <response code="400">Invalid reference link.</response>
+            <response code="404">The stack could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkCriticalAsync(System.String)">
+            <summary>
+            Mark future occurrences as critical
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkNotCriticalAsync(System.String)">
+            <summary>
+            Mark future occurrences as not critical
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="204">The stacks were marked as not critical.</response>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.EnableNotificationsAsync(System.String)">
+            <summary>
+            Enable notifications
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.DisableNotificationsAsync(System.String)">
+            <summary>
+            Disable notifications
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="204">Notifications are disabled for the stacks.</response>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkNotFixedAsync(System.String)">
+            <summary>
+            Mark not fixed
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="204">The stacks were marked as not fixed.</response>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkHiddenAsync(System.String)">
+            <summary>
+            Mark hidden
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.MarkNotHiddenAsync(System.String)">
+            <summary>
+            Mark not hidden
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="204">The stacks were marked as not hidden.</response>
+            <response code="404">One or more stacks could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.PromoteAsync(System.String)">
+            <summary>
+            Promote to external service
+            </summary>
+            <param name="id">The identifier of the stack.</param>
+            <response code="404">The stack could not be found.</response>
+            <response code="426">Promote to External is a premium feature used to promote an error stack to an external system.</response>
+            <response code="501">"No promoted web hooks are configured for this project.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.DeleteAsync(System.String)">
+            <summary>
+            Remove
+            </summary>
+            <param name="ids">A comma delimited list of stack identifiers.</param>
+            <response code="204">No Content.</response>
+            <response code="400">One or more validation errors occurred.</response>
+            <response code="404">One or more stacks were not found.</response>
+            <response code="500">An error occurred while deleting one or more stacks.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get all
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The organization could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="sort">Controls the sort order that the data is returned in. In this example -date returns the results descending by date.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The organization could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetNewAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get newest
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetNewByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get newest by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetNewByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get newest by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetRecentAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get most recent
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetRecentByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get most recent by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetRecentByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get most recent by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetFrequentAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get most frequent
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetFrequentByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets most frequent by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetFrequentByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets most frequent by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetUsersAsync(System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Get most users
+            </summary>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetUsersByOrganizationAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets most users by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StackController.GetUsersByProjectAsync(System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets most users by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="filter">A filter that controls what data is returned from the server.</param>
+            <param name="time">The time filter that limits the data being returned to a specific date range.</param>
+            <param name="offset">The time offset in minutes that controls what data is returned based on the time filter. This is used for time zone support.</param>
+            <param name="mode">If no mode is set then the whole stack object will be returned. If the mode is set to summary than a light weight object will be returned.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="400">Invalid filter.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="426">Unable to view stack occurrences for the suspended organization.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StatusController.IndexAsync">
+            <summary>
+            Get the status of the API
+            </summary>
+            <response code="503">Contains a message detailing the service outage message.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.StatusController.GetSystemNotificationAsync">
+            <summary>
+            Returns the current system notification messages.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.GetCurrentUserAsync">
+            <summary>
+            Get current user
+            </summary>
+            <response code="404">The current user could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.GetByIdAsync(System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the user.</param>
+            <response code="404">The user could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.GetByOrganizationAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="404">The organization could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.PatchAsync(System.String,Exceptionless.Api.Utility.Delta{Exceptionless.Api.Models.UpdateUser})">
+            <summary>
+            Update
+            </summary>
+            <param name="id">The identifier of the user.</param>
+            <param name="changes">The changes</param>
+            <response code="400">An error occurred while updating the user.</response>
+            <response code="404">The user could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.UpdateEmailAddressAsync(System.String,System.String)">
+            <summary>
+            Update email address
+            </summary>
+            <param name="id">The identifier of the user.</param>
+            <param name="email">The new email address.</param>
+            <response code="400">An error occurred while updating the users email address.</response>
+            <response code="404">The user could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.VerifyAsync(System.String)">
+            <summary>
+            Verify email address
+            </summary>
+            <param name="token">The token identifier.</param>
+            <response code="400">Verify Email Address Token has expired.</response>
+            <response code="404">The user could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UserController.ResendVerificationEmailAsync(System.String)">
+            <summary>
+            Resend verification email
+            </summary>
+            <param name="id">The identifier of the user.</param>
+            <response code="404">The user could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.Api.Controllers.UtilityController.ValidateAsync(System.String)">
+            <summary>
+            Validate search query
+            </summary>
+            <remarks>
+            Validate a search query to ensure that it can successfully be searched by the api
+            </remarks>
+            <param name="query">The query you wish to validate.</param>
+        </member>
+        <member name="P:Exceptionless.Api.Models.NewWebHook.Version">
+            <summary>
+            The schema version that should be used.
+            </summary>
+        </member>
+        <member name="T:Exceptionless.Api.Utility.Delta`1">
+            <summary>
+            A class the tracks changes (i.e. the Delta) for a particular <typeparamref name="TEntityType" />.
+            </summary>
+            <typeparam name="TEntityType">TEntityType is the base type of entity this delta tracks changes for.</typeparam>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:Exceptionless.Api.Utility.Delta`1" />.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of <see cref="T:Exceptionless.Api.Utility.Delta`1" />.
+            </summary>
+            <param name="entityType">
+                The derived entity type for which the changes would be tracked.
+                <paramref name="entityType" /> should be assignable to instances of <typeparamref name="TEntityType" />.
+            </param>
+        </member>
+        <member name="P:Exceptionless.Api.Utility.Delta`1.EntityType">
+            <summary>
+            The actual type of the entity for which the changes are tracked.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.Clear">
+            <summary>
+            Clears the Delta and resets the underlying Entity.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.TrySetPropertyValue(System.String,System.Object,`0)">
+            <summary>
+            Attempts to set the Property called <paramref name="name" /> to the <paramref name="value" /> specified.
+            <remarks>
+            Only properties that exist on <see cref="P:Exceptionless.Api.Utility.Delta`1.EntityType" /> can be set.
+            If there is a type mismatch the request will fail.
+            </remarks>
+            </summary>
+            <param name="name">The name of the Property</param>
+            <param name="value">The new value of the Property</param>
+            <param name="target">The target entity to set the value on</param>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.TryGetPropertyValue(System.String,System.Object@,`0)">
+            <summary>
+            Attempts to get the value of the Property called <paramref name="name" /> from the underlying Entity.
+            <remarks>
+            Only properties that exist on <see cref="P:Exceptionless.Api.Utility.Delta`1.EntityType" /> can be retrieved.
+            Both modified and unmodified properties can be retrieved.
+            </remarks>
+            </summary>
+            <param name="name">The name of the Property</param>
+            <param name="value">The value of the Property</param>
+            <param name="target">The target entity to get the value from</param>
+            <returns>True if the Property was found</returns>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.TryGetPropertyType(System.String,System.Type@)">
+            <summary>
+            Attempts to get the <see cref="T:System.Type" /> of the Property called <paramref name="name" /> from the underlying Entity.
+            <remarks>
+            Only properties that exist on <see cref="P:Exceptionless.Api.Utility.Delta`1.EntityType" /> can be retrieved.
+            Both modified and unmodified properties can be retrieved.
+            </remarks>
+            </summary>
+            <param name="name">The name of the Property</param>
+            <param name="type">The type of the Property</param>
+            <returns>Returns <c>true</c> if the Property was found and <c>false</c> if not.</returns>
+        </member>
+        <member name="P:Exceptionless.Api.Utility.Delta`1.UnknownProperties">
+            <summary>
+            A dictionary of values that were set on the delta that don't exist in TEntityType.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)">
+            <summary>
+            Overrides the DynamicObject TrySetMember method, so that only the properties
+            of <see cref="P:Exceptionless.Api.Utility.Delta`1.EntityType" /> can be set.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Overrides the DynamicObject TryGetMember method, so that only the properties
+            of <see cref="P:Exceptionless.Api.Utility.Delta`1.EntityType" /> can be got.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.GetEntity">
+            <summary>
+            Returns the <see cref="P:Exceptionless.Api.Utility.Delta`1.EntityType" /> instance
+            that holds all the changes (and original values) being tracked by this Delta.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.GetChangedPropertyNames">
+            <summary>
+            Returns the Properties that have been modified through this Delta as an
+            enumeration of Property Names
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.GetChangedPropertyNames(`0)">
+            <summary>
+            Returns the Properties that have been modified from their original values through this Delta as an
+            enumeration of Property Names
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.GetUnchangedPropertyNames">
+            <summary>
+            Returns the Properties that have not been modified through this Delta as an
+            enumeration of Property Names
+            </summary>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.CopyChangedValues(System.Object)">
+            <summary>
+            Copies any changed property values that match up from the underlying entity (accessible via <see cref="M:Exceptionless.Api.Utility.Delta`1.GetEntity" />)
+            to the <paramref name="target" /> entity.
+            </summary>
+            <param name="target">The target entity to be updated.</param>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.CopyUnchangedValues(System.Object)">
+            <summary>
+            Copies the unchanged property values from the underlying entity (accessible via <see cref="M:Exceptionless.Api.Utility.Delta`1.GetEntity" />)
+            to the <paramref name="target" /> entity.
+            </summary>
+            <param name="target">The entity to be updated.</param>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.Patch(System.Object)">
+            <summary>
+            Overwrites the <paramref name="target" /> entity with the changes tracked by this Delta.
+            <remarks>The semantics of this operation are equivalent to a HTTP PATCH operation, hence the name.</remarks>
+            </summary>
+            <param name="target">The entity to be updated.</param>
+        </member>
+        <member name="M:Exceptionless.Api.Utility.Delta`1.Put(System.Object)">
+            <summary>
+            Overwrites the <paramref name="target" /> entity with the values stored in this Delta.
+            <remarks>The semantics of this operation are equivalent to a HTTP PUT operation, hence the name.</remarks>
+            </summary>
+            <param name="target">The entity to be updated.</param>
+        </member>
+        <member name="T:Exceptionless.Api.Utility.NonValidatingParameterBindingAttribute">
+            <summary>
+            An attribute to disable WebApi model validation for a particular type.
+            </summary>
+        </member>
+        <member name="T:Exceptionless.Api.Utility.PerRequestParameterBinding">
+            <summary>
+            A special HttpParameterBinding that uses a Per Request formatter instance with access to the Request.
+            </summary>
+            <remarks>
+            This class is needed by the OData deserializers, since they actually need access to more than just the Request
+            body; they also need to interrogate the RequestUri etc.
+            </remarks>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.GetByOrganizationAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by organization
+            </summary>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="404">The organization could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.GetByProjectAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.GetDefaultTokenAsync(System.String)">
+            <summary>
+            Get a projects default token
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.GetByIdAsync(System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the token.</param>
+            <response code="404">The token could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.PostAsync(Exceptionless.Api.Models.NewToken)">
+            <summary>
+            Create
+            </summary>
+            <remarks>
+            To create a new token, you must specify an organization_id. There are three valid scopes: client, user and admin.
+            </remarks>
+            <param name="token">The token.</param>
+            <response code="400">An error occurred while creating the token.</response>
+            <response code="409">The token already exists.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.PostByProjectAsync(System.String,Exceptionless.Api.Models.NewToken)">
+            <summary>
+            Create for project
+            </summary>
+            <remarks>
+            This is a helper action that makes it easier to create a token for a specific project.
+            You may also specify a scope when creating a token. There are three valid scopes: client, user and admin.
+            </remarks>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="token">The token.</param>
+            <response code="400">An error occurred while creating the token.</response>
+            <response code="404">The project could not be found.</response>
+            <response code="409">The token already exists.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.PostByOrganizationAsync(System.String,Exceptionless.Api.Models.NewToken)">
+            <summary>
+            Create for organization
+            </summary>
+            <remarks>
+            This is a helper action that makes it easier to create a token for a specific organization.
+            You may also specify a scope when creating a token. There are three valid scopes: client, user and admin.
+            </remarks>
+            <param name="organizationId">The identifier of the organization.</param>
+            <param name="token">The token.</param>
+            <response code="400">An error occurred while creating the token.</response>
+            <response code="409">The token already exists.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.PatchAsync(System.String,Exceptionless.Api.Utility.Delta{Exceptionless.Api.Models.UpdateToken})">
+            <summary>
+            Update
+            </summary>
+            <param name="id">The identifier of the token.</param>
+            <param name="changes">The changes</param>
+            <response code="400">An error occurred while updating the token.</response>
+            <response code="404">The token could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.TokenController.DeleteAsync(System.String)">
+            <summary>
+            Remove
+            </summary>
+            <param name="ids">A comma delimited list of token identifiers.</param>
+            <response code="204">No Content.</response>
+            <response code="400">One or more validation errors occurred.</response>
+            <response code="404">One or more tokens were not found.</response>
+            <response code="500">An error occurred while deleting one or more tokens.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.GetByProjectAsync(System.String,System.Int32,System.Int32)">
+            <summary>
+            Get by project
+            </summary>
+            <param name="projectId">The identifier of the project.</param>
+            <param name="page">The page parameter is used for pagination. This value must be greater than 0.</param>
+            <param name="limit">A limit on the number of objects to be returned. Limit can range between 1 and 100 items.</param>
+            <response code="404">The project could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.GetByIdAsync(System.String)">
+            <summary>
+            Get by id
+            </summary>
+            <param name="id">The identifier of the web hook.</param>
+            <response code="404">The web hook could not be found.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.PostAsync(Exceptionless.Api.Models.NewWebHook)">
+            <summary>
+            Create
+            </summary>
+            <param name="webhook">The web hook.</param>
+            <returns></returns>
+            <response code="400">An error occurred while creating the web hook.</response>
+            <response code="409">The web hook already exists.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.DeleteAsync(System.String)">
+            <summary>
+            Remove
+            </summary>
+            <param name="ids">A comma delimited list of web hook identifiers.</param>
+            <response code="204">No Content.</response>
+            <response code="400">One or more validation errors occurred.</response>
+            <response code="404">One or more web hooks were not found.</response>
+            <response code="500">An error occurred while deleting one or more web hooks.</response>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.SubscribeAsync(Newtonsoft.Json.Linq.JObject,System.Int32)">
+            <summary>
+            This controller action is called by zapier to create a hook subscription.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.UnsubscribeAsync(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            This controller action is called by zapier to remove a hook subscription.
+            </summary>
+        </member>
+        <member name="M:Exceptionless.App.Controllers.API.WebHookController.Test">
+            <summary>
+            This controller action is called by zapier to test auth.
+            </summary>
+        </member>
+        <member name="M:Foundatio.Logging.LogBuilderExtensions.SetActionContext(Foundatio.Logging.ILogBuilder,System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Marks the event as being a critical occurrence.
+            </summary>
+        </member>
+    </members>
+</doc>
